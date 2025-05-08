@@ -205,6 +205,44 @@ nav {
     color: var(--gray-color);
 }
 
+/* Documentation Section */
+.documentation {
+    background-color: var(--light-color);
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.documentation p {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+.doc-link-container {
+    display: flex;
+    justify-content: center;
+}
+
+.doc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(66, 133, 244, 0.2);
+}
+
+.doc-link i {
+    font-size: 1.3rem;
+}
+
+.doc-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(66, 133, 244, 0.3);
+}
+
 /* Screenshots Section */
 .screenshots {
     background-color: var(--light-color);
