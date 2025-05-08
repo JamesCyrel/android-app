@@ -1,1 +1,2 @@
-# android-app
+# Campus Event Manager - Landing Page
+
