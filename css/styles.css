@@ -276,6 +276,10 @@ nav {
 
 .download-buttons {
     margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .download-btn img {
@@ -285,6 +289,43 @@ nav {
 
 .download-btn img:hover {
     transform: scale(1.05);
+}
+
+.download-direct {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    padding: 14px 30px;
+}
+
+.download-direct i {
+    font-size: 1.3rem;
+}
+
+.installation-guide {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    background-color: rgba(66, 133, 244, 0.05);
+    padding: 25px 30px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.installation-guide h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.installation-guide ol {
+    padding-left: 20px;
+    text-align: left;
+}
+
+.installation-guide li {
+    margin-bottom: 10px;
+    color: var(--gray-color);
 }
 
 .app-info {
