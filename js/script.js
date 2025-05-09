@@ -32,32 +32,79 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Screenshot Carousel Navigation
+    // Improved Screenshot Carousel Navigation
     const carousel = document.querySelector('.screenshot-carousel');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
+    const screenshotItems = document.querySelectorAll('.screenshot-item');
     
-    if (carousel && prevBtn && nextBtn) {
-        const scrollAmount = 320; // Width of screenshot item + gap
+    if (carousel && prevBtn && nextBtn && screenshotItems.length > 0) {
+        let currentIndex = 0;
+        const totalItems = screenshotItems.length;
+        
+        // Center the first item initially
+        updateCarouselPosition();
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            updateCarouselPosition();
+        });
         
         prevBtn.addEventListener('click', function() {
-            carousel.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            updateCarouselPosition();
         });
         
         nextBtn.addEventListener('click', function() {
-            carousel.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarouselPosition();
+        });
+        
+        function updateCarouselPosition() {
+            // Get current item width including margins
+            const itemWidth = screenshotItems[0].offsetWidth + 30; // Width + margin
+            const carouselWidth = carousel.offsetWidth;
+            
+            // Calculate position to center the current item
+            const offset = (carouselWidth / 2) - (itemWidth / 2);
+            const scrollAmount = -(currentIndex * itemWidth) + offset;
+            
+            carousel.style.transform = `translateX(${scrollAmount}px)`;
+            
+            // Highlight current item
+            screenshotItems.forEach((item, index) => {
+                if (index === currentIndex) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1.05)';
+                } else {
+                    item.style.opacity = '0.7';
+                    item.style.transform = 'scale(1)';
+                }
             });
+        }
+        
+        // Auto-advance carousel every 5 seconds
+        let autoAdvance = setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarouselPosition();
+        }, 5000);
+        
+        // Stop auto-advance on interaction
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(autoAdvance);
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            autoAdvance = setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarouselPosition();
+            }, 5000);
         });
     }
     
     // Add animation on scroll
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.feature-card, .screenshot-item, .contact-item');
+        const elements = document.querySelectorAll('.feature-card, .contact-item');
         
         elements.forEach(element => {
             const elementPosition = element.getBoundingClientRect().top;
@@ -71,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // Set initial styles for animation
-    document.querySelectorAll('.feature-card, .screenshot-item, .contact-item').forEach(element => {
+    document.querySelectorAll('.feature-card, .contact-item').forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
         element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';

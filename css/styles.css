@@ -246,21 +246,31 @@ nav {
 /* Screenshots Section */
 .screenshots {
     background-color: var(--light-color);
+    padding: 80px 20px;
 }
 
 .screenshot-carousel {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
     max-width: 1200px;
     margin: 0 auto 30px;
-    overflow-x: auto;
+    overflow: hidden;
     padding: 20px 0;
-    scroll-behavior: smooth;
+    position: relative;
+    transition: transform 0.5s ease;
 }
 
 .screenshot-item {
-    flex: 0 0 300px;
+    flex: 0 0 auto;
+    width: 300px;
     text-align: center;
+    margin: 0 15px;
+    transition: transform 0.3s ease;
+}
+
+.screenshot-item:hover {
+    transform: scale(1.05);
 }
 
 .screenshot-item img {
@@ -268,7 +278,8 @@ nav {
     height: auto;
     border-radius: 12px;
     box-shadow: var(--shadow);
-    margin-bottom: 15px;
+    object-fit: contain;
+    max-height: 600px;
 }
 
 .screenshot-item p {
@@ -278,26 +289,34 @@ nav {
 .carousel-nav {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 25px;
+    margin-top: 20px;
 }
 
 .carousel-nav button {
     background-color: white;
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     box-shadow: var(--shadow);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
 }
 
-.carousel-nav button:hover {
+.carousel-nav button:hover:not([disabled]) {
     background-color: var(--primary-color);
     color: white;
+    transform: translateY(-2px);
+}
+
+.carousel-nav button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 /* Download Section */
